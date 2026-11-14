@@ -293,8 +293,9 @@ INCLUDE ../ext/misc/base64.c
 INCLUDE ../ext/misc/base85.c
 INCLUDE ../ext/misc/optname.c
 INCLUDE ../ext/misc/ieee754.c
-INCLUDE ../ext/misc/series.c
 INCLUDE ../ext/misc/regexp.c
+INCLUDE ../ext/misc/series.c
+INCLUDE ../ext/misc/tryeval.c
 #ifndef SQLITE_SHELL_FIDDLE
 INCLUDE ../ext/misc/fileio.c
 INCLUDE ../ext/misc/completion.c
@@ -5488,7 +5489,7 @@ static void open_db(ShellState *p, int openFlags){
     }
 
 #ifndef SQLITE_OMIT_LOAD_EXTENSION
-    sqlite3_enable_load_extension(p->db, 1);
+    sqlite3_enable_load_extension(p->db, !p->bSafeMode);
 #endif
     sqlite3_sha_init(p->db, 0, 0);
     sqlite3_shathree_init(p->db, 0, 0);
@@ -5502,18 +5503,16 @@ static void open_db(ShellState *p, int openFlags){
     sqlite3_series_init(p->db, 0, 0);
     sqlite3_diskused_init(p->db, 0, 0);
     sqlite3_strdup_init(p->db, 0, 0);
-#ifndef SQLITE_SHELL_FIDDLE
     if( !p->bSafeMode ){
+      sqlite3_tryeval_init(p->db, 0, 0);
+#ifndef SQLITE_SHELL_FIDDLE
       sqlite3_fileio_init(p->db, 0, 0);
-    }
-    sqlite3_completion_init(p->db, 0, 0);
 #endif
 #ifdef SQLITE_HAVE_ZLIB
-    if( !p->bSafeModePersist ){
       sqlite3_zipfile_init(p->db, 0, 0);
       sqlite3_sqlar_init(p->db, 0, 0);
-    }
 #endif
+    }
 #ifdef SQLITE_SHELL_EXTFUNCS
     /* Create a preprocessing mechanism for extensions to make
      * their own provisions for being built into the shell.
@@ -10487,6 +10486,7 @@ static int dotCmdSafe(ShellState *p){
   int i;
   p->bSafeMode = 1;
   p->bSafeModePersist = 1;
+  if( p->db ) sqlite3_enable_load_extension(p->db, 0);
   for(i=0; i<ArraySize(p->aAuxDb); i++){
     sqlite3 *db = p->aAuxDb[i].db;
     if( db==0 ) continue;
@@ -10496,6 +10496,9 @@ static int dotCmdSafe(ShellState *p){
 #endif
     sqlite3_create_function(db, "writefile", -1, 0, 0, 0, 0, 0);
     sqlite3_create_function(db, "zipfile", -1, 0, 0, 0, 0, 0);
+    sqlite3_create_function(db, "tryeval", -1, 0, 0, 0, 0, 0);
+    sqlite3_create_function(db, "expire", 1, 0, 0, 0, 0, 0);
+    sqlite3_create_function(db, "expire", 2, 0, 0, 0, 0, 0);
   }
   return 0;
 }

@@ -1,5 +1,5 @@
-C Extend\sthe\scapable(X)\sfunction\sagain\swith\scapable('unsafe')\swhich\sis\strue\nas\slong\sas\sthe\sCLI\swas\snot\slaunched\swith\s--safe\sand\sthe\s.safe\scommand\shas\nnot\sbeen\srun.
-D 2026-11-14T15:58:19.677
+C Include\sthe\stryeval\sextension\sin\sthe\sCLI,\sbut\sdisable\sit\sin\ssafe\smode.\nAlso\sdisable\sextension\sloading\sin\ssafe\smode,\sas\san\sadded\ssafety.
+D 2026-11-14T18:45:38.002
 F .fossil-settings/binary-glob 61195414528fb3ea9693577e1980230d78a1f8b0a54c78cf1b9b24d0a409ed6a x
 F .fossil-settings/empty-dirs dbb81e8fc0401ac46a1491ab34a7f2c7c0452f2f06b54ebb845d024ca8283ef1
 F .fossil-settings/ignore-glob 35175cdfcf539b2318cb04a9901442804be81cd677d8b889fcc9149c21f239ea
@@ -414,7 +414,7 @@ F ext/misc/strdup.c eaa6592f5d29543eef591e2919d7410363e2b75d720ee7144a8b31590713
 F ext/misc/templatevtab.c e76d4cdb73f986c8165c0fe7831f1a94da55d4f1eafcb7d377e1b0b79ee8679a
 F ext/misc/tmstmpvfs.c 8fe8b10e0ac7c46faf491811e21dcb67ccde5cff8f133701121f793d2a7d41e4
 F ext/misc/totype.c ba11aac3c0b52c685bd25aa4e0f80c41c624fb1cc5ab763250e09ddc762bc3a8
-F ext/misc/tryeval.c 8f23aadd6d0b99ee083a8c3205b37e7782e5f63151236f64faba7ba6a954c119
+F ext/misc/tryeval.c d8e3ebcda7d213fd6b789d3cbe365bd8d70bcc13a1ef8dfcea629cd50981ac46
 F ext/misc/uint.c 327afc166058acf566f33a15bf47c869d2d3564612644d9ff81a23efc8b36039
 F ext/misc/unionvtab.c fe1011f185408b0afd1631fdce8090c4e69ff4eae10a760101e08b624f53bcb1
 F ext/misc/urifuncs.c f71360d14fa9e7626b563f1f781c6148109462741c5235ac63ae0f8917b9c751
@@ -811,7 +811,7 @@ F src/random.c 606b00941a1d7dd09c381d3279a058d771f406c5213c9932bbd93d5587be4b9c
 F src/resolve.c 5a4226d00273e2f0527d339a6ecd627ad3d80877222d515a37f0f82f816a26ed
 F src/rowset.c 8432130e6c344b3401a8874c3cb49fefe6873fec593294de077afea2dce5ec97
 F src/select.c 4bf12a8e3b48699ea5f140319d268667693340a347d83daaf522ab55ac420b4b
-F src/shell.c.in c756e5fa51c4e077b9a37966e87b27a3354dd57e6c6c331d2118193ebb2abe14
+F src/shell.c.in 3dccee4bfccbc5587af6ce5c208e6533e50bc98f68e33eeb3334e0cfbf4bccf0
 F src/sqlite.h.in 13ef5a15d18bfe8cebab55fa69b52ecf4233cbf1a1ec59823679a3dac2a91814
 F src/sqlite3.rc 015537e6ac1eec6c7050e17b616c2ffe6f70fca241835a84a4f0d5937383c479
 F src/sqlite3ext.h 5e113c4c0442f2f1b3345d44cbe4b82fad45f2fc0c35f0ed4eef27fb8f1cb394
@@ -2310,8 +2310,8 @@ F tool/warnings-clang.sh bbf6a1e685e534c92ec2bfba5b1745f34fb6f0bc2a362850723a9ee
 F tool/warnings.sh a554d13f6e5cf3760f041b87939e3d616ec6961859c3245e8ef701d1eafc2ca2
 F tool/win/sqlite.vsix deb315d026cc8400325c5863eef847784a219a2f
 F tool/winmain.c 00c8fb88e365c9017db14c73d3c78af62194d9644feaf60e220ab0f411f3604c
-P dad81fcfd6fb42a9cb85ea5757452e45620b715b50321745ed8d5210e50b8651
-R fad4a3a2ab1101b128243b6c1ef758c6
+P 7f9fec67240df4555a4c699f34162b9f36337b98e8c649bfbc371eaa36a8b897
+R a57d467bf070d7e0fb131c97097b22c2
 U drh
-Z d2937b365c8654e796c93ea7e97614bf
+Z c955b27ae56a00a71f142bda42cc0968
 # Remove this line to create a well-formed Fossil manifest.
